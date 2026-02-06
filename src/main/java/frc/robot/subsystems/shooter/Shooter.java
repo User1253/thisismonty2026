@@ -7,9 +7,12 @@ import com.ctre.phoenix6.hardware.TalonFX;
 
 import com.ctre.phoenix6.signals.MotorAlignmentValue;
 
+import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
 import edu.wpi.first.wpilibj.PneumaticHub;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants.ShooterConstants;
+
 import com.ctre.phoenix6.controls.Follower;
 
 import static frc.robot.Constants.ShooterConstants.*;
@@ -18,16 +21,18 @@ public class Shooter {
     TalonFX rightLaunch = new TalonFX(rightLauncherID);
     TalonFX leftLaunch = new TalonFX(leftLauncherID);
     TalonSRX feedMe = new TalonSRX(feedRollerID);
-    TalonFXConfiguration config;
     Solenoid hood;
     Follower follow;
 
+    
+
     public Shooter(PneumaticHub hub) {
         hood = hub.makeSolenoid(solenoidID);
+        
 
         leftLaunch.getConfigurator().apply(new TalonFXConfiguration());
         rightLaunch.getConfigurator().apply(new TalonFXConfiguration());
-        this.config = new TalonFXConfiguration();
+      
 
         this.follow = new Follower(leftLaunch.getDeviceID(), MotorAlignmentValue.Aligned);
         
@@ -38,10 +43,16 @@ public class Shooter {
         rightLaunch.setControl(follow);
 
 
+
+
+        
+
+
+
     }
 
     public void setLaunch(double speed) {
-        leftLaunch.set(speed * maxLaunchSpeed);
+        leftLaunch.set(speed);
     }
 
     public void setFeederSpeed(double speed) {

@@ -4,11 +4,13 @@ import static frc.robot.Constants.DriveConstants.backLeftID;
 import static frc.robot.Constants.DriveConstants.backRightID;
 import static frc.robot.Constants.DriveConstants.frontLeftID;
 import static frc.robot.Constants.DriveConstants.frontRightID;
+import static frc.robot.Constants.ShooterConstants.spedToHit;
 
 import edu.wpi.first.wpilibj.PneumaticHub;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.DrivetrainIOReal;
 import frc.robot.subsystems.drive.DrivetrainIOSim;
@@ -52,7 +54,7 @@ public class RobotContainer {
     controller.x().whileTrue(new RunIntake(intake, 1)); // Run intake motors
     controller.b().toggleOnTrue(new SetIntakeState(intake, true)); // Move the intake down
     controller.rightTrigger(0.5).whileTrue(new RunFeed(shooter, 1)); // shoot the ball after
-    controller.y().toggleOnTrue(new RunLaunch(shooter, 1)); // toggles the flyweels
+    controller.y().toggleOnTrue(new RunLaunch(shooter, ShooterConstants.spedToHit)); // toggles the flyweels
     controller.povUp().toggleOnTrue(new HoodState(shooter)); // Hood state
 
     // Shoots the ball backwards if it is stuck

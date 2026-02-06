@@ -1,5 +1,6 @@
 package frc.robot;
 
+import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
 import edu.wpi.first.math.util.Units;
 
 public final class Constants {
@@ -28,6 +29,27 @@ public final class Constants {
     // Max Speed
     public static final double maxFeedSpeed = 0.4; // 0-1 range
     public static final double maxLaunchSpeed = 0.6; // 0-1 range;
+
+
+    public static final double targetDistance = 0.0; //feet from robot 
+
+    public static InterpolatingDoubleTreeMap lerp = new InterpolatingDoubleTreeMap(); 
+
+    //key = distance in feets, value = velocity in percentage of max power
+    static{
+        lerp.put(0.0, 0.0);
+        lerp.put(1.0, 0.0);
+        lerp.put(2.0, 0.0);
+        lerp.put(3.0, 0.0);
+        lerp.put(4.0, 0.0);
+        lerp.put(5.0, 0.0);
+        lerp.put(6.0, 0.0);
+        lerp.put(7.0, 0.0);
+        lerp.put(8.0, 0.0);
+        lerp.put(9.0, 0.0);
+        lerp.put(10.0, 0.0);} 
+
+    public static final double spedToHit = lerp.get(ShooterConstants.targetDistance); 
   }
 
   public static class IntakeConstants {
