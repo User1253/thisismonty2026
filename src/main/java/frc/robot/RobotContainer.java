@@ -21,6 +21,7 @@ import frc.robot.subsystems.intake.Commands.SetIntakeState;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.shooter.Commands.RunFeed;
 import frc.robot.subsystems.shooter.Commands.RunLaunch;
+import frc.robot.subsystems.shooter.Commands.spedUp;
 
 public class RobotContainer {
 
@@ -54,12 +55,18 @@ public class RobotContainer {
     controller.x().whileTrue(new RunIntake(intake, 1)); // Run intake motors
     controller.b().toggleOnTrue(new SetIntakeState(intake, true)); // Move the intake down
     controller.rightTrigger(0.5).whileTrue(new RunFeed(shooter, 1)); // shoot the ball after
-    controller.y().toggleOnTrue(new RunLaunch(shooter, ShooterConstants.spedToHit)); // toggles the flyweels
+    controller.y().toggleOnTrue(new RunLaunch(shooter)); // toggles the flyweels
+    
     controller.povUp().toggleOnTrue(new HoodState(shooter)); // Hood state
 
+    //variable stuff 
+    controller.rightBumper().onTrue(new spedUp(0.05)); 
+    controller.leftBumper().onTrue(new spedUp(-0.05)); 
+    
+
     // Shoots the ball backwards if it is stuck
-    controller.leftBumper().whileTrue(new RunIntake(intake, -1));
-    controller.leftBumper().whileTrue(new RunFeed(shooter, -1));
+    controller.leftTrigger().whileTrue(new RunIntake(intake, -1));
+    controller.leftTrigger().whileTrue(new RunFeed(shooter, -1));
   }
 
   public Command getAutonomousCommand() {

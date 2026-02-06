@@ -49,7 +49,7 @@ public final class Constants {
         lerp.put(9.0, 0.0);
         lerp.put(10.0, 0.0);} 
 
-    public static final double spedToHit = lerp.get(ShooterConstants.targetDistance); 
+    public static double spedToHit = lerp.get(ShooterConstants.targetDistance); 
   }
 
   public static class IntakeConstants {
